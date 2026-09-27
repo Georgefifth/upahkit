@@ -1,52 +1,83 @@
-# UpahKit — Devpost submission draft
+# UpahKit — Devpost submission copy
 
-## Short summary
+## Project name
 
-UpahKit helps Malaysian gig workers and freelancers organize shifts, agreed pay, partial payments, and the proof they already have into a clear, exportable record.
+UpahKit
 
-## The problem
+## Elevator pitch
 
-When a worker is paid late or receives only part of what they expected, the details can be scattered across platform screens, chat messages, bank transfers, and memory. That makes it harder to understand the gap or explain the timeline to someone who can help.
+A private, browser-based pay ledger that helps Malaysian gig workers organize shifts, partial payments, and proof of what remains unpaid.
 
-## What we built
+## Thumbnail
 
-UpahKit is a mobile-friendly income and evidence organizer. Workers can record a job, date, optional agreed payment date, hours, client or platform, agreed amount, payments received, notes, and the kind of supporting proof they have. The dashboard calculates a transparent outstanding estimate, highlights balances past the date entered by the user, and helps users spot evidence gaps. Records can be searched, filtered, updated, exported as CSV, or printed for a conversation with a union, legal aid provider, or qualified adviser.
+Upload [`video/thumbnail.png`](video/thumbnail.png) (PNG, 1536 × 1024, 3:2, about 1.8 MB).
 
-The prototype uses fictional Malaysian ringgit examples. It keeps records in the current browser and does not send them to an AI model or a server.
+## About the project
 
-## Why this approach
+### Inspiration
 
-Legal-tech projects such as Clearclaim show the value of guiding people through a specific legal workflow, while FairVio highlights how important accessibility is for underserved workers. General gig-work tools such as Gridwise focus on cross-platform income insights, market comparisons, mileage, and expenses; Everlance focuses on mileage and expense records. UpahKit focuses on a different, narrower step: turning job-by-job agreements, partial payments, due dates, and evidence notes into a reviewable timeline. The core calculation is deterministic, and each amount can be traced back to the user-entered record.
+After a shift, the story of the work and the pay can be split across a platform, a chat, a bank transfer, and memory. We wanted to make it easier to gather those details into a clear record before a worker talks with a union, legal-aid provider, or another qualified adviser.
 
-## How to try it
+Tools such as [Gridwise](https://gridwise.io/features) help gig workers bring earnings, mileage, and work insights together; [Everlance](https://www.everlance.com/partner/uber) focuses on mileage and expense records. UpahKit takes a narrower path: one shift at a time, what was agreed, what arrived, what evidence the worker has, and what remains to explain. It does not connect to those services or import their data.
 
-Open `index.html` in a modern browser, or run `python3 -m http.server 4173` from the project folder and visit `http://localhost:4173`.
+### What it does
 
-Suggested demo: show the RM404.00 sample balance, add a fictional unpaid shift, filter to unpaid work, record a partial payment, then print the updated summary.
+UpahKit lets a worker record a job, client or platform, work date, hours, agreed pay, payments received, notes, and the kind of supporting evidence they have. A due date is optional and entered by the worker.
+
+The dashboard shows agreed earnings, received payments, a job-by-job outstanding estimate, a recent-activity timeline, and an evidence checklist. The calculation is transparent:
+
+$$\text{outstanding} = \max(\text{agreed pay} - \text{payments recorded}, 0)$$
+
+The “past due” view only uses a due date the worker entered; it is a record-keeping reminder, not a legal finding. Workers can search and filter records, update them as payments arrive, export a CSV, or print a summary to discuss with an adviser.
+
+The demo uses fictional Malaysian ringgit records. It starts with RM836.50 agreed, RM432.50 received, and RM404.00 outstanding. No account is required. Records stay in the current browser; evidence files are not uploaded.
+
+### How we built it
+
+The prototype uses vanilla HTML, CSS, and JavaScript. Browser `localStorage` keeps the records on the device, a deterministic calculation derives balances from the entered amounts, CSV export creates a local download, and print styles produce a paper-friendly summary. There is no runtime backend, external API, or AI feature.
+
+Playwright with Firefox is used for development end-to-end checks. The narrated demo was captured with the demo-recorder Playwright workflow and compiled with FFmpeg. The thumbnail artwork was generated with OpenAI image generation; the demo narration is synthetic English speech (`en-SG-LunaNeural`). No worker records or personal data were sent to these tools—the video uses fictional sample data.
+
+### Challenges we ran into
+
+The main product challenge was showing a useful “past due” signal without implying a legal conclusion. We made the date optional, only compare against a date entered by the worker, and explain inline that the signal does not establish legal rights or recoverability.
+
+We also had to make the evidence checklist useful without asking people to upload sensitive files. The prototype records the type of evidence a person says they have, while keeping the files themselves outside the app.
+
+### Accomplishments that we're proud of
+
+- A complete no-account workflow: review sample records, add a shift, record a partial payment, see the totals update, and export or print a summary.
+- Every balance can be traced to user-entered agreed and received amounts.
+- A calm, mobile-friendly interface with a visible evidence checklist and clear prototype boundaries.
+- A 2 minute 49 second narrated product demo with designed slides, animated cursor, focus zoom, and captions.
+
+### What we learned
+
+Even simple arithmetic needs to be explainable when someone is under stress. Showing the agreed amount and payments beside each balance makes errors easier to spot and correct. We also learned that missing information should stay visibly missing: an absent due date should not become an invented overdue status, and an evidence note should not be presented as proof the app has verified.
+
+### What's next for UpahKit
+
+Validate the flow and wording with Malaysian gig workers, worker organizations, and qualified advisers. Next, improve accessibility and Bahasa Malaysia support, then explore privacy-conscious backup and reminders only if workers find them useful. Any legal guidance or referral content would need review against current Malaysian sources by qualified advisers.
 
 ## Built with
 
-HTML, CSS, JavaScript, browser `localStorage`, CSV download, and the browser print dialog. Playwright with Firefox is used for development-only end-to-end checks. No external API, paid service, or AI model is required at runtime.
+JavaScript · HTML · CSS
 
-## Safety and limitations
+## Try it out
 
-UpahKit is a record-keeping prototype, not legal advice. Its totals are user-entered estimates; they do not decide whether someone is an employee or contractor, whether a payment is legally owed, or whether it can be recovered. It records the type of proof a user has but does not upload files. The sample data is fictional. Any future legal guidance or referral flow needs review against current Malaysian sources by qualified advisers.
+- **Source code and local run instructions:** https://github.com/Georgefifth/upahkit
 
-## Demo video outline (about 2 minutes)
+There is no hosted live app yet; the repository README explains how to run the static prototype locally.
 
-1. **The situation (20 sec):** a worker has completed shifts but the work details and payments are spread across apps and messages.
-2. **The overview (20 sec):** show agreed earnings, received payments, and the outstanding estimate, and explain the simple calculation.
-3. **Add a record (35 sec):** enter a fictional shift and agreed rate, note that no payment arrived, and record the evidence type.
-4. **Update a payment (25 sec):** open the record, add a partial payment, and show the updated balance and status.
-5. **Take the information with you (20 sec):** export CSV or print the adviser-ready summary.
-6. **State the limits (10 sec):** records remain in this browser; the estimate is not a legal determination.
+## Image gallery
 
-## Inspiration and references
+Recommended uploads (all PNGs):
 
-- [LexHack 2026 challenge and judging criteria](https://lexhack-2026.devpost.com/)
-- [Clearclaim — SMU LIT Legal-Tech Hackathon 2026, first place](https://devpost.com/software/claimwarrior)
-- [FairVio — legal assistance for migrant workers](https://devpost.com/software/hack-the-globe-2025)
-- [Lawgorithm — legal workflow automation award winner](https://devpost.com/software/lawgorithm-815k2x)
-- [Gridwise — gig and hourly worker earnings app](https://gridwise.io/)
-- [Everlance — mileage and expense tracking](https://www.everlance.com/)
-- [JTKSM — Department of Labour Peninsular Malaysia](https://jtksm.mohr.gov.my/)
+- `video/dashboard.png` — sample dashboard and evidence checklist.
+- `video/record-added.png` — fictional shift added and past-date filter applied.
+- `video/slides/slide-03.png` — transparent balance calculation.
+- `video/slides/slide-05.png` — privacy boundary and next steps.
+
+## Demo video
+
+Upload [`video/UpahKit-demo.mp4`](video/UpahKit-demo.mp4) (2:49, 1080p, about 9.8 MB). It meets the 2–3 minute demo-video limit listed for [LexHack 2026](https://lexhack-2026.devpost.com/).

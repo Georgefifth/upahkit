@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: upahkit-lexhack-2026
+    runtime: static
+    buildCommand: mkdir -p render-site && cp index.html favicon.svg render-site/
+    staticPublishPath: render-site
+    autoDeployTrigger: commit
+    envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=()
