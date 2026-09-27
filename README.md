@@ -6,6 +6,8 @@
 
 ![UpahKit mobile dashboard](screenshots/upahkit-mobile.png)
 
+**Try the live demo:** https://upahkit-lexhack-2026.onrender.com
+
 ## Run it
 
 No build step, account, API key, or paid service is required. Open `index.html` in a modern browser, or serve this folder locally:

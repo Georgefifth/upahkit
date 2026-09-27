@@ -66,8 +66,7 @@ JavaScript · HTML · CSS
 ## Try it out
 
 - **Source code and local run instructions:** https://github.com/Georgefifth/upahkit
-
-There is no hosted live app yet; the repository README explains how to run the static prototype locally.
+- **Live demo:** https://upahkit-lexhack-2026.onrender.com
 
 ## Image gallery
 
