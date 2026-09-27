@@ -1,0 +1,12 @@
+{
+  "name": "upahkit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A browser-based gig work income and payment evidence organizer",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}

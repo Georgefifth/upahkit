@@ -2,6 +2,10 @@
 
 **Keep your work, payments, and proof together.** UpahKit is a small, browser-based record organizer for Malaysian gig workers and freelancers who need a clearer picture of agreed income and outstanding payments.
 
+![UpahKit desktop dashboard](screenshots/upahkit-desktop.png)
+
+![UpahKit mobile dashboard](screenshots/upahkit-mobile.png)
+
 ## Run it
 
 No build step, account, API key, or paid service is required. Open `index.html` in a modern browser, or serve this folder locally:
@@ -11,6 +15,16 @@ python3 -m http.server 4173
 ```
 
 Then visit `http://localhost:4173`.
+
+## Run the Firefox end-to-end check
+
+```sh
+npm install
+npx playwright install firefox
+npm run test:e2e
+```
+
+The browser automation is a development-only dependency. It exercises adding, editing, filtering, exporting, printing, and deleting records, and refreshes the screenshots in `screenshots/`.
 
 ## Demo flow
 

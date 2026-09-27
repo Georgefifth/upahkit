@@ -26,7 +26,7 @@ Suggested demo: show the RM404.00 sample balance, add a fictional unpaid shift, 
 
 ## Built with
 
-HTML, CSS, JavaScript, browser `localStorage`, CSV download, and the browser print dialog. No external API, paid service, or AI model is required.
+HTML, CSS, JavaScript, browser `localStorage`, CSV download, and the browser print dialog. Playwright with Firefox is used for development-only end-to-end checks. No external API, paid service, or AI model is required at runtime.
 
 ## Safety and limitations
 
